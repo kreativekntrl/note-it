@@ -1,6 +1,11 @@
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
+const {
+    readFromFile,
+    readAndAppend,
+    writeToFile,
+  } = require('./public/scripts/fsUtils');
 
 const PORT = process.env.PORT || 3001;
 
@@ -25,18 +30,19 @@ app.get("/api/notes", (req, res) =>
 //POST Route for new notes
 app.post("/api/notes", (req, res) => {
     const { title, text, id } = req.body;
+    console.log(req.body);
 
-    if (res.body) {
+    if (req.body) {
         const newNote = {
             title,
             text,
             id,
         };
 
-        readAndAppend(newNote, "/db/notes.json");
-        res.json(`Note added successfully`);
-    } 
+    readAndAppend(newNote, './db/db.json');   
+    }  
 });
+
 
 //GET route to send all non-specified routes to landing page 
 app.get("*", (req, res) =>
