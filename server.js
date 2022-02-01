@@ -68,18 +68,18 @@ app.get('/api/notes/:id', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
     const noteId = req.params.id;
     readFromFile('./db/db.json')
-      .then((data) => JSON.parse(data))
-      .then((json) => {
-        // Make a new array of all tips except the one with the ID provided in the URL
-        const result = json.filter((note) => note.id !== noteId);
-  
-        // Save that array to the filesystem
-        writeToFile('./db/db.json', result);
-  
-        // Respond to the DELETE request
-        res.json(`Item ${noteId} has been deleted 🗑️`);
-      });
-  });
+        .then((data) => JSON.parse(data))
+        .then((json) => {
+            // Make a new array of all tips except the one with the ID provided in the URL
+            const result = json.filter((note) => note.id !== noteId);
+
+            // Save that array to the filesystem
+            writeToFile('./db/db.json', result);
+
+            // Respond to the DELETE request
+            res.json(`Item ${noteId} has been deleted 🗑️`);
+        });
+});
 
 //GET route to send all non-specified routes to landing page 
 app.get("*", (req, res) =>
