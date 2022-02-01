@@ -1,11 +1,12 @@
 const fs = require("fs");
 const express = require("express");
 const path = require("path");
+var uniqid = require('uniqid'); 
 const {
     readFromFile,
     readAndAppend,
     writeToFile,
-  } = require('./public/scripts/fsUtils');
+  } = require("./public/scripts/fsUtils");
 
 const PORT = process.env.PORT || 3001;
 
@@ -23,9 +24,9 @@ app.get("/notes", (req, res) =>
 );
 
 //GET route for getting notes from our database
-app.get("/api/notes", (req, res) => 
-    res.json("/db/db.json")
-);
+app.get('/api/notes', (req, res) => {
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+  });
 
 //POST Route for new notes
 app.post("/api/notes", (req, res) => {
@@ -36,13 +37,13 @@ app.post("/api/notes", (req, res) => {
         const newNote = {
             title,
             text,
-            id,
+            id: uniqid()
         };
 
-    readAndAppend(newNote, './db/db.json');   
+    readAndAppend(newNote, "./db/db.json");   
     }  
 });
-
+ 
 
 //GET route to send all non-specified routes to landing page 
 app.get("*", (req, res) =>
