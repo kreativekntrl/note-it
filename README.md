@@ -11,6 +11,8 @@ I worked on developing the backend of a note taking app. This app allows users t
   - [GitHub](#github)
 
 Check it out here [https://arcane-plains-13881.herokuapp.com/]
+![IMAGE](./public/note-it-ss.png)
+
 ## Collaborators 
 Ava Steimle
 
