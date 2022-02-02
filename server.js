@@ -50,7 +50,7 @@ app.post("/api/notes", (req, res) => {
         readAndAppend(newNote, "./db/db.json");
         res.json("note added");
     } else {
-        res.error('Error in adding tip');
+        res.error('Error in adding note');
     }
 });
 
